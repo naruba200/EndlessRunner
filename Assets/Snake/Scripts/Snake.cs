@@ -116,10 +116,11 @@ public class Snake : MonoBehaviour
         if (other.gameObject.CompareTag("Food"))
         {
             Grow();
+            ScoreManager.Instance.OnFoodEaten();
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
-            ResetState();
+            GameManager.Instance.GameOver();
         }
         else if (other.gameObject.CompareTag("Wall"))
         {
@@ -136,9 +137,9 @@ public class Snake : MonoBehaviour
         Vector3 position = transform.position;
 
         if (direction.x != 0f) {
-            position.x = Mathf.RoundToInt(-wall.position.x + direction.x);
+            position.x = Mathf.RoundToInt(-wall.position.x + direction.x * 1.5f);
         } else if (direction.y != 0f) {
-            position.y = Mathf.RoundToInt(-wall.position.y + direction.y);
+            position.y = Mathf.RoundToInt(-wall.position.y + direction.y * 1.5f);
         }
 
         transform.position = position;
